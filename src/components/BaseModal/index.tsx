@@ -4,7 +4,7 @@ import './index.less';
 
 interface Props {
   /**
-   * 弹窗是否展示
+   * 弹窗是否展示1
    */
   visible?: boolean;
   /**
