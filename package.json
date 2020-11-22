@@ -5,7 +5,7 @@
   "main": "./dist/react_components.main.js",
   "module": "./dist/react_components.module.js",
   "scripts": {
-    "doc": "styleguidist server",
+    "doc": "styleguidist server --open",
     "build_doc": "styleguidist build",
     "build": "rimraf dist && cross-env NODE_ENV=production rollup -c",
     "build:watch": "rollup -c -w",
@@ -42,7 +42,7 @@
     "react": "^16.13.1",
     "react-docgen-typescript": "^1.20.5",
     "react-dom": "^17.0.1",
-    "react-styleguidist": "^11.1.2",
+    "react-styleguidist": "11.1.1",
     "rollup": "^2.33.3",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
