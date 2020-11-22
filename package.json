@@ -12,6 +12,9 @@
     "build:dev": "rollup -c",
     "commit": "git-cz"
   },
+  "publishConfig": {
+    "registry": "http://localhost:8080"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -38,6 +41,7 @@
     "less": "^3.12.2",
     "less-loader": "^7.1.0",
     "lint-staged": "^10.5.1",
+    "plop": "^2.7.4",
     "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-docgen-typescript": "^1.20.5",
