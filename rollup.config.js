@@ -12,6 +12,7 @@ const fs = require('fs');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+// 按需加载方式进行打包
 const packages = {};
 const dir = path.join(__dirname, '/src/components');
 const files = fs.readdirSync(dir);
@@ -23,7 +24,7 @@ files.forEach((file) => {
 });
 
 const all = `index`;
-// packages[all] = path.join(__dirname, '/src/components/index.js');
+packages[all] = path.join(__dirname, '/src/components/index.js');
 
 const createRollupConfig = (file, name) => {
   const config = {

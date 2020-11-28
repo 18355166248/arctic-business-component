@@ -2,8 +2,8 @@
   "name": "arctic-business-component",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/react_components.main.js",
-  "module": "./dist/react_components.module.js",
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
   "scripts": {
     "doc": "styleguidist server --open",
     "build_doc": "styleguidist build",
