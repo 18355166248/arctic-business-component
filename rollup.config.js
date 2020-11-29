@@ -30,7 +30,7 @@ const createRollupConfig = (file, name) => {
   const config = {
     input: file,
     output: {
-      file: name === all ? 'lib/es/index.js' : `lib/es/${name}/index.js`,
+      file: name === all ? 'lib/index.js' : `lib/${name}/index.js`,
       format: 'es', // 因为已经是多入口打包了，所以本身引入的时候就是打算单独引入组件实现按需加载
       name,
       globals: {
