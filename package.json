@@ -59,9 +59,9 @@
     "webpack": "^4.44.1"
   },
   "peerDependencies": {
-    "antd": "4.8.6",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "antd": ">=4.8.6",
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
   "husky": {
     "hooks": {
