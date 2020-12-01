@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
+import './index.less';
 
 interface Props {
-  name?: string
+  name?: string;
 }
 
 interface Item {
@@ -86,7 +87,7 @@ const EditableTable = (props: Props) => {
       const row = (await form.validateFields()) as Item;
 
       const newData = [...data];
-      const index = newData.findIndex(item => key === item.key);
+      const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, {
@@ -147,7 +148,7 @@ const EditableTable = (props: Props) => {
     },
   ];
 
-  const mergedColumns = columns.map(col => {
+  const mergedColumns = columns.map((col) => {
     if (!col.editable) {
       return col;
     }

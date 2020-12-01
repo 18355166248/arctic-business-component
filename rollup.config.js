@@ -17,6 +17,12 @@ const packages = {};
 const dir = path.join(__dirname, '/src/components');
 const files = fs.readdirSync(dir);
 
+if (files.includes('.DS_Store')) {
+  files.splice(0, 1);
+}
+
+console.log('files', files);
+
 files.forEach((file) => {
   if (file !== 'index.js') {
     packages[file] = `src/components/${file}/index.tsx`;
