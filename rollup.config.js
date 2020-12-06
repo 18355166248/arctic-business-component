@@ -57,7 +57,7 @@ const createRollupConfig = (file, name) => {
       // 使得 rollup 支持 commonjs 规范，识别 commonjs 规范的依赖
       commonjs(),
       postcss({
-        // 单独打包css文件默认false
+        // 单独打包css文件, 默认false
         extract: true, // 也可以指定打包后的路径或css文件名
         // Minimize CSS, boolean or options for cssnano.
         minimize: isProd,

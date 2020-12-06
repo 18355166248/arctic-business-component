@@ -1,6 +1,5 @@
 import React from 'react';
-import Modal from 'antd/lib/modal/index.js';
-import 'antd/lib/modal/style/index.less';
+import { Modal } from 'antd';
 import './index.less';
 
 interface Props {
