@@ -6,7 +6,13 @@ module.exports = {
   title: 'Arctic业务组件库',
   version: packageFile.version, // 同上 使用 package.json 的 version
   usageMode: 'expand', // 自动打开文档的缩放
-  pagePerSection: process.env.NODE_ENV === 'production', // 是否每页一个组件显示
+  pagePerSection: true || process.env.NODE_ENV === 'production', // 是否每页一个组件显示
+  sections: [
+    {
+      name: "<section name>",
+      components: "src/components/**/index.{js,jsx,tsx}"
+    }
+  ],
   styleguideDir: 'dist_docs', // 打包的目录
   components: 'src/components/**/*.tsx', // 写入对应目录的文档
   defaultExample: true,
