@@ -9,9 +9,13 @@ module.exports = {
   pagePerSection: true || process.env.NODE_ENV === 'production', // 是否每页一个组件显示
   sections: [
     {
-      name: "<section name>",
-      components: "src/components/**/index.{js,jsx,tsx}"
-    }
+      name: '介绍',
+      content: 'src/index.md',
+    },
+    {
+      name: '组件库',
+      components: 'src/components/*/**/index.{js,jsx,tsx}',
+    },
   ],
   styleguideDir: 'dist_docs', // 打包的目录
   components: 'src/components/**/*.tsx', // 写入对应目录的文档
@@ -31,7 +35,7 @@ module.exports = {
       asyncAwait: false,
     },
   },
-  updateDocs (docs, file) {
+  updateDocs(docs, file) {
     if (docs.doclets.version) {
       const version = packageFile.version;
       docs.doclets.version = version;

@@ -6,46 +6,46 @@ interface Props {
   /**
    * 控制器
    */
-  ctrlRef?: object
+  ctrlRef?: object;
   /**
    * 接口请求 Promise
    */
-  api: Function,
+  api: Function;
   /**
    * 接口请求参数
    */
-  paramsKey: string,
+  paramsKey: string;
   /**
    * 表格唯一key
    */
-  rowKey: string,
+  rowKey: string;
   /**
    * 表格选择一行后的回调
    */
-  onSelect: Function,
+  onSelect: Function;
   /**
    * 失去焦点回调
    */
-  onBlurCb: Function,
+  onBlurCb: Function;
   /**
-  * 表格配置
-  */
-  columns: [],
+   * 表格配置
+   */
+  columns: [];
   /**
-  * 样式
-  */
-  style: object,
+   * 样式
+   */
+  style: object;
   /**
    * 输入框placeholder
    */
-  placeholder: string,
+  placeholder: string;
   /**
    * 表格宽度
    */
-  scrollY: number
+  scrollY: number;
 }
 
-function SearchSelectWithTableOption(props: Props) {
+function SearchSelectTable(props: Props) {
   const {
     ctrlRef,
     onBlurCb,
@@ -57,8 +57,7 @@ function SearchSelectWithTableOption(props: Props) {
     paramsKey,
     columns,
     style = {
-      width:
-        '400px'
+      width: '400px',
     },
     placeholder,
     rowKey = 'id',
@@ -101,16 +100,17 @@ function SearchSelectWithTableOption(props: Props) {
         if (loading) {
           return (
             <div style={{ textAlign: 'center' }}>
-              <Spin
-                size="small"
-                className="m-6 ml-20"
-              />
+              <Spin size="small" className="m-6 ml-20" />
             </div>
           );
         }
 
         if (selectValue && data.length === 0) {
-          return <div className="p-10" style={{ textAlign: 'center' }}>暂无数据</div>;
+          return (
+            <div className="p-10" style={{ textAlign: 'center' }}>
+              暂无数据
+            </div>
+          );
         }
 
         if (data.length === 0) {
@@ -123,8 +123,8 @@ function SearchSelectWithTableOption(props: Props) {
             columns={columns}
             dataSource={data}
             pagination={false}
-            rowKey={record => record[rowKey]}
-            onRow={record => {
+            rowKey={(record) => record[rowKey]}
+            onRow={(record) => {
               return {
                 onClick: () => {
                   _.isFunction(onSelect) && onSelect(record);
@@ -141,7 +141,7 @@ function SearchSelectWithTableOption(props: Props) {
       {...otherProps}
       placeholder={placeholder || '姓名/拼音/简拼/联系电话模糊查询'}
     >
-      {data.map(item => (
+      {data.map((item) => (
         <Select.Option key={item[rowKey]}>{item.text}</Select.Option>
       ))}
     </Select>
@@ -181,7 +181,7 @@ function SearchSelectWithTableOption(props: Props) {
     }
 
     api({ [paramsKey]: value })
-      .then(res => {
+      .then((res) => {
         console.log(res);
 
         setData(res.data);
@@ -231,4 +231,4 @@ function SearchSelectWithTableOption(props: Props) {
   }
 }
 
-export default SearchSelectWithTableOption;
+export default SearchSelectTable;
