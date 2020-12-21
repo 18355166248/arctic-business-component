@@ -1,5 +1,8 @@
-import React from 'react';
-import { Calendar } from 'antd';
+import React, { useState } from 'react';
+import { Calendar, Popover } from 'antd';
+import './index.less'
+import isFunction from 'lodash/isFunction'
+import moment from 'moment'
 
 interface Props {
   /**
@@ -10,20 +13,44 @@ interface Props {
    * 接口请求 Promise
    */
   api: Function;
+  /**
+   * 月份
+   */
+  value: object;
+  /**
+   * 月份改变
+   */
+  onChange: Function;
+  /**
+   * 下面内容popover壳子
+   */
+  PopoverContent: Function;
 }
 
 function CalendarMonth(prop: Props) {
-  return <Calendar onPanelChange={onPanelChange} headerRender={headerRender} />;
+  const { value, onChange, PopoverContent } = prop
+  const [appt, setAppt] = useState({})
 
-  function onPanelChange(value, mode) {
-    console.log(value.format('YYYY-MM-DD'), mode);
+  return (
+    <Calendar headerRender={() => null} onChange={_onChange} dateFullCellRender={dateFullCellRender} value={value} />
+  );
+
+  function _onChange(date: object) {
+    isFunction(onChange) && onChange(date)
   }
 
-  // 自定义头部
-  function headerRender({ value, type, onChange, onTypeChange }) {
-    console.log(value, type, onChange, onTypeChange);
-
-    return <div>66666</div>;
+  function dateFullCellRender(date: { format: Function, startOf: Function }) {
+    return (
+      <div className="CM-card">
+        {date.format('DD')}
+        <Popover text='33333' content='33333' trigger="click">
+          <div onClick={() => setAppt({ text: '2222', content: <div>99999</div> })}>2</div>
+        </Popover>
+        <Popover text='1111' content='1111' trigger="click">
+          <div onClick={() => setAppt({ text: '111', content: <div>77777</div> })}>1</div>
+        </Popover>
+      </div>
+    )
   }
 }
 

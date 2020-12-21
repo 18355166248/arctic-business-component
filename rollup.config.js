@@ -65,6 +65,7 @@ const createRollupConfig = (file, name) => {
         sourceMap: !isProd,
         // This plugin will process files ending with these extensions and the extensions supported by custom loaders.
         extensions: ['.less', '.css'],
+        modules: true,
       }),
       isProd && terser(), // 压缩js
     ],
