@@ -1,3 +1,9 @@
+const path = require('path');
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
+
 module.exports = {
   entry: './src/components/index.js',
   module: {
@@ -5,6 +11,7 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)?$/,
         loader: require.resolve('babel-loader'),
+        include: [resolve('src')],
         query: {
           cacheDirectory: true,
           plugins: [['import', { libraryName: 'antd', style: true }]],

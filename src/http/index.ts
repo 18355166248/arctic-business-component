@@ -1,41 +1,41 @@
-/**
- * 全站http配置
- *
- * axios参数说明
- * isSerialize是否开启form表单提交
- * isToken是否需要token
- */
-import axios from 'axios'
-axios.defaults.timeout = 10000;
-//返回其他状态吗
-axios.defaults.validateStatus = function (status) {
-  return status >= 200 && status <= 500; // 默认的
-};
-//跨域请求，允许保存cookie
-axios.defaults.withCredentials = true;
+import axios from 'axios';
+import EnvConfig from './env.config';
+import { APIInterceptor } from './APIInterceptor';
 
-//HTTPrequest拦截
-axios.interceptors.request.use(config => {
-  return config
-}, error => {
-  return Promise.reject(error)
+const DPMSHTTP = axios.create({
+  baseURL: EnvConfig.baseUrl,
+  timeout: 60000,
 });
-//HTTPresponse拦截
-axios.interceptors.response.use(res => {
-  const code = res.data.code
-  const status = Number(code) || 200;
-  const message = res.data.msg || '未知错误';
-  //如果是401则跳转到登录页面
-  if (status === 401) console.log('退出登录并回到登录页');
-  // 如果请求为非200否者默认统一处理
-  if (status !== 200) {
-    console.log('报错', message);
 
-    return Promise.reject(new Error(message))
-  }
-  return res;
-}, error => {
-  return Promise.reject(new Error(error));
-})
+// DPMSHTTP.interceptors.request.use(...APIInterceptor.redirectURL);
+DPMSHTTP.interceptors.request.use(...APIInterceptor.transParams);
 
-export default axios;
+DPMSHTTP.interceptors.response.use(...APIInterceptor.dispatchByResStatus);
+DPMSHTTP.interceptors.response.use(...APIInterceptor.handleError);
+DPMSHTTP.interceptors.response.use(...APIInterceptor.flattenRes);
+
+const JSONDPMSHTTP = axios.create({
+  baseURL: EnvConfig.baseUrl,
+  timeout: 60000,
+});
+
+// JSONDPMSHTTP.interceptors.request.use(...APIInterceptor.redirectURL);
+JSONDPMSHTTP.interceptors.request.use(...APIInterceptor.transJSONParams);
+
+JSONDPMSHTTP.interceptors.response.use(...APIInterceptor.dispatchByResStatus);
+JSONDPMSHTTP.interceptors.response.use(...APIInterceptor.handleError);
+JSONDPMSHTTP.interceptors.response.use(...APIInterceptor.flattenRes);
+
+const SCRMHTTP = axios.create({
+  baseURL: EnvConfig.SCRMServerUrl,
+  timeout: 60000,
+});
+
+// SCRMHTTP.interceptors.request.use(...APIInterceptor.redirectURL);
+SCRMHTTP.interceptors.request.use(...APIInterceptor.transJSONParamsWithScrm);
+
+SCRMHTTP.interceptors.response.use(...APIInterceptor.dispatchByResStatus);
+SCRMHTTP.interceptors.response.use(...APIInterceptor.handleError);
+SCRMHTTP.interceptors.response.use(...APIInterceptor.flattenRes);
+
+export { DPMSHTTP, JSONDPMSHTTP, SCRMHTTP };

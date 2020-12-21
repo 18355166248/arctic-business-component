@@ -1,7 +1,7 @@
-import axios from '../../http'
+import { DPMSHTTP } from '../../http/index'
 
 export function getTemList() {
-  return axios({
+  return DPMSHTTP({
     url: '/crm/patient/list',
     method: 'get'
   })

@@ -10,7 +10,8 @@
     "build": "rimraf lib && cross-env NODE_ENV=production rollup -c",
     "build:watch": "rollup -c -w",
     "build:dev": "rollup -c",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "config:dev": "node ./src/http/config dev"
   },
   "publishConfig": {
     "registry": "http://localhost:8080"
@@ -20,6 +21,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
@@ -43,7 +45,9 @@
     "less": "^3.12.2",
     "less-loader": "^7.1.0",
     "lint-staged": "^10.5.1",
+    "lodash": "^4.17.20",
     "mockjs": "^1.1.0",
+    "moment": "^2.29.1",
     "plop": "^2.7.4",
     "prettier": "^2.1.2",
     "react": "^16.13.1",
@@ -63,9 +67,9 @@
   },
   "peerDependencies": {
     "antd": ">=4.8.6",
+    "axios": ">-0.21.0",
     "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
-    "axios": ">-0.21.0"
+    "react-dom": ">=16.9.0"
   },
   "husky": {
     "hooks": {

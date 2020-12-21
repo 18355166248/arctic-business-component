@@ -13,15 +13,23 @@ module.exports = {
       content: 'src/index.md',
     },
     {
-      name: '组件库',
+      name: '基础组件库',
       components: 'src/components/*/**/index.{js,jsx,tsx}',
+    },
+    {
+      name: '多重组件库',
+      components: 'src/business-components/*/**/index.{js,jsx,tsx}',
     },
   ],
   styleguideDir: 'dist_docs', // 打包的目录
   components: 'src/components/**/*.tsx', // 写入对应目录的文档
   defaultExample: true,
   moduleAliases: {
-    'rsg-example': path.resolve(__dirname, 'src'),
+    '@': path.resolve(__dirname, 'src'),
+    http: path.resolve(__dirname, 'src/http'),
+    components: path.resolve(__dirname, 'src/components'),
+    const: path.resolve(__dirname, 'src/const'),
+    utils: path.resolve(__dirname, 'src/utils'),
   },
   exampleMode: 'expand', // 表示示例代码是否展开或者合上文档中代码示例的标签初始化状态，决定是否展开
   webpackConfig: require('./webpack.config'),
