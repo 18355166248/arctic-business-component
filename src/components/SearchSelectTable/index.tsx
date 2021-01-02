@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Select, Spin, Table } from 'antd';
-import _ from 'lodash';
+import isFunction from 'lodash/isFunction';
+import debounce from 'lodash/debounce';
 
 interface Props {
   /**
@@ -91,7 +92,7 @@ function SearchSelectTable(props: Props) {
       value={selectValue}
       notFoundContent={getNotFoundContent()}
       filterOption={false}
-      onSearch={_.debounce(onFetchUser, 300)}
+      onSearch={debounce(onFetchUser, 300)}
       // suffixIcon={<DPMSIcon type="dpms-icon-search" />}
       onBlur={onBlur}
       bordered={showText ? true : false}
@@ -127,7 +128,7 @@ function SearchSelectTable(props: Props) {
             onRow={(record) => {
               return {
                 onClick: () => {
-                  _.isFunction(onSelect) && onSelect(record);
+                  isFunction(onSelect) && onSelect(record);
                   setData([]);
 
                   showText ? setSelectValue(record.patientName) : setSelectValue(undefined);

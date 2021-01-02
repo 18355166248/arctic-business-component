@@ -19,6 +19,7 @@ module.exports = {
       },
       {
         test: /\.(css|less)?$/,
+        exclude: [resolve('src/components')],
         use: [
           { loader: require.resolve('style-loader') },
           { loader: require.resolve('css-loader') },
@@ -29,6 +30,24 @@ module.exports = {
                 javascriptEnabled: true,
               },
             },
+          },
+        ],
+      },
+      {
+        test: /\.(css|less)?$/,
+        include: [resolve('src/components')],
+        use: [
+          { loader: require.resolve('style-loader') },
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              modules: {
+                localIdentName: '[path][name]-[local]-[hash:5]',
+              },
+            },
+          },
+          {
+            loader: require.resolve('less-loader'),
           },
         ],
       },

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Popover } from 'antd';
-import './index.less'
+import styles from './index.less'
 import isFunction from 'lodash/isFunction'
-import moment from 'moment'
 
 interface Props {
   /**
@@ -41,7 +40,7 @@ function CalendarMonth(prop: Props) {
 
   function dateFullCellRender(date: { format: Function, startOf: Function }) {
     return (
-      <div className="CM-card">
+      <div className={styles.CMCard}>
         {date.format('DD')}
         <Popover text='33333' content='33333' trigger="click">
           <div onClick={() => setAppt({ text: '2222', content: <div>99999</div> })}>2</div>
