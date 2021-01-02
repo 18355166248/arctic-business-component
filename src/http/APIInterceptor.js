@@ -3,8 +3,13 @@ import axios from 'axios';
 import qs from 'qs';
 import { APIUtil } from './API.util';
 import { objectUtil } from 'utils/object.util';
-import EnvConfig from './env.config';
 import { notification } from 'antd';
+import account from '../../config/account';
+
+const enviroment = account.env;
+
+// eslint-disable-next-line import/no-dynamic-require
+const EnvConfig = require(`../../config/enviroment/${enviroment}.env.js`).default;
 
 const authErrorNotificationThrottler = _.throttle(notification.error, 1000);
 
@@ -48,7 +53,7 @@ const APIInterceptor = {
       // 判断是否有特殊参数
       convertSpecialParams(configCopy);
 
-      let params = {
+      const params = {
         ...defaultSystemParams,
         ...(configCopy.params || {}),
       };
@@ -81,12 +86,6 @@ const APIInterceptor = {
         delete configCopy.params;
       }
 
-      if (EnvConfig.debug.http) {
-        console.group('%c★★★ 发送 http 请求 ★★★', 'color: #5FCAFF;');
-        console.log(configCopy);
-        console.groupEnd();
-      }
-
       return configCopy;
     },
   ],
@@ -99,7 +98,7 @@ const APIInterceptor = {
       // 判断是否有特殊参数
       convertSpecialParams(configCopy);
 
-      let params = {
+      const params = {
         ...defaultSystemParams,
         ...(configCopy.params || {}),
       };
@@ -123,12 +122,6 @@ const APIInterceptor = {
         }
       }
 
-      if (EnvConfig.debug.http) {
-        console.group('%c★★★ 发送 http 请求 ★★★', 'color: #5FCAFF;');
-        console.log(configCopy);
-        console.groupEnd();
-      }
-
       return configCopy;
     },
   ],
@@ -142,7 +135,7 @@ const APIInterceptor = {
       // 判断是否有特殊参数
       convertSpecialParams(configCopy);
 
-      let params = {
+      const params = {
         ...defaultSystemParams,
         ...(configCopy.params || {}),
         _token: store.auth._token,
@@ -171,12 +164,6 @@ const APIInterceptor = {
           configCopy.headers['Content-Type'] = 'application/x-www-form-urlencoded';
           configCopy.data = formData;
         }
-      }
-
-      if (EnvConfig.debug.http) {
-        console.group('%c★★★ 发送 http 请求 ★★★', 'color: #5FCAFF;');
-        console.log(configCopy);
-        console.groupEnd();
       }
 
       return configCopy;
@@ -212,23 +199,11 @@ const APIInterceptor = {
         return response;
       }
 
-      if (EnvConfig.debug.http) {
-        console.group('%c★★★ http 响应成功 ★★★', 'color: #31DA43;');
-        console.log(response);
-        console.groupEnd();
-      }
-
       return response;
     },
     (error) => {
       if (error?.config?.$skipResponseInterceptor || error?.config?.$skipAuthMonitor) {
         return Promise.reject(error);
-      }
-
-      if (EnvConfig.debug.http) {
-        console.group('%c★★★ http 响应失败 ★★★', 'color: #FF3F3F;');
-        console.log(error);
-        console.groupEnd();
       }
 
       // 权限错误

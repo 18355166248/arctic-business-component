@@ -54,7 +54,7 @@ function SearchSelectTable(props: Props) {
     showText = true,
     introducerPatientName,
     api,
-    paramsKey,
+    paramsKey = 'regularParam',
     columns,
     style = {
       width: '400px',
@@ -182,8 +182,6 @@ function SearchSelectTable(props: Props) {
 
     api({ [paramsKey]: value })
       .then((res) => {
-        console.log(res);
-
         setData(res.data);
         fetchingRef.current = false;
       })

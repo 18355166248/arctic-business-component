@@ -8,17 +8,23 @@ import { getTemList } from './index.api.ts';
 const columns = [
   {
     title: '名字',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'patientName',
   },
   {
-    title: '性别',
-    dataIndex: 'sex',
-    key: 'sex',
+    title: '年龄',
+    dataIndex: 'age',
+  },
+  {
+    title: '邮件',
+    dataIndex: 'email',
+  },
+  {
+    title: '手机',
+    dataIndex: 'mobile',
   },
 ];
 
 <>
-  <SearchSelectTable api={getTemList} columns={columns} rowKey="id" />
+  <SearchSelectTable api={getTemList} columns={columns} rowKey="patientId" />
 </>;
 ```

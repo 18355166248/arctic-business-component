@@ -1,8 +1,9 @@
 import { DPMSHTTP } from '../../http/index'
 
-export function getTemList() {
+export function getTemList(params) {
   return DPMSHTTP({
-    url: '/crm/patient/list',
-    method: 'get'
+    url: 'patient/patient/home/list/regular',
+    method: 'get',
+    params
   })
 }
