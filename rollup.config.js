@@ -21,8 +21,6 @@ if (files.includes('.DS_Store')) {
   files.splice(0, 1);
 }
 
-console.log('files', files);
-
 files.forEach((file) => {
   if (file !== 'index.js') {
     packages[file] = `src/components/${file}/index.tsx`;
@@ -35,15 +33,30 @@ packages[all] = path.join(__dirname, '/src/components/index.js');
 const createRollupConfig = (file, name) => {
   const config = {
     input: file,
-    output: {
-      file: name === all ? 'lib/index.js' : `lib/${name}/index.js`,
-      format: 'es', // 因为已经是多入口打包了，所以本身引入的时候就是打算单独引入组件实现按需加载
-      name,
-      globals: {
-        antd: 'antd',
-        react: 'react',
+    output: [
+      {
+        file: name === all ? 'lib/index.js' : `lib/${name}/index.js`,
+        format: 'es', // 因为已经是多入口打包了，所以本身引入的时候就是打算单独引入组件实现按需加载
+        name,
+        globals: {
+          antd: 'antd',
+          react: 'react',
+          lodash: '_',
+          moment: 'moment',
+        },
       },
-    },
+      {
+        file: name === all ? 'module/index.js' : `module/${name}/index.js`,
+        format: 'umd', // 因为已经是多入口打包了，所以本身引入的时候就是打算单独引入组件实现按需加载
+        name,
+        globals: {
+          antd: 'antd',
+          react: 'react',
+          lodash: '_',
+          moment: 'moment',
+        },
+      },
+    ],
     plugins: [
       json(),
       nodeResolve({ browser: true }),
@@ -70,7 +83,7 @@ const createRollupConfig = (file, name) => {
       isProd && terser(), // 压缩js
     ],
     // 指出应将哪些模块视为外部模块，如 Peer dependencies 中的依赖
-    external: ['antd', 'react', 'react-dom'],
+    external: ['antd', 'react', 'react-dom', 'lodash', 'moment'],
   };
   return config;
 };
