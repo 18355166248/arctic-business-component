@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./lib/index.js",
-  "module": "./lib/index.js",
+  "module": "./module/index.js",
   "scripts": {
     "doc": "styleguidist server --open",
     "build_doc": "styleguidist build",
